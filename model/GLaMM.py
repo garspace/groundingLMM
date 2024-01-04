@@ -258,7 +258,11 @@ class GLaMMForCausalLM(LlavaLlamaForCausalLM):
                 gt_mask = masks_list[batch_idx]
                 # Resize gt_mask to match pred_mask if needed
                 if gt_mask.shape[0] != pred_mask.shape[0]:
-                    gt_mask = gt_mask[:pred_mask.shape[0]]
+                    if gt_mask.shape[0] > pred_mask.shape[0]:
+                        gt_mask = gt_mask[:pred_mask.shape[0]]
+                    else:
+                        gt_mask = torch.vstack([gt_mask, torch.zeros(tuple((pred_mask.shape[0]-gt_mask.shape[0],gt_mask.shape[1],gt_mask.shape[2])), device=gt_mask.device)])
+
 
                 assert gt_mask.shape[0] == pred_mask.shape[
                     0], f"Shape mismatch: gt_mask {gt_mask.shape}, pred_mask {pred_mask.shape}"
