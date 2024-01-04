@@ -171,6 +171,7 @@ torchvision=0.14.0
 mmcv-full=1.6.0 or 1.7.0
 accelerate=0.21.0
 注意：mmcv-full通过whl文件下载安装，需要和cuda版本对应，版本不兼容时修改mmcv_maximum_version = '1.7.0'
+下载链接：https://download.openmmlab.com/mmcv/dist/cu117/torch1.13/index.html
 
 
 ## 📜 Citation
