@@ -165,6 +165,13 @@ GLaMM demonstrates its prowess in engaging in detailed, region-specific, and gro
 </p>
 
 ---
+## Environment
+torch+cu117=1.13.1
+torchvision=0.14.0
+mmcv-full=1.6.0 or 1.7.0
+accelerate=0.21.0
+注意：mmcv-full通过whl文件下载安装，需要和cuda版本对应，版本不兼容时修改mmcv_maximum_version = '1.7.0'
+
 
 ## 📜 Citation
 ```bibtex
