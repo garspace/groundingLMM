@@ -217,4 +217,5 @@ def _process_conversation(conversation, target, tokenizer, sep, sep2):
 
     target[cur_len:] = IGNORE_INDEX
     if cur_len < tokenizer.model_max_length:
+        # assert may leads to error, you can consider to remove this line
         assert cur_len == total_len
