@@ -163,9 +163,16 @@ def initialize_model(args, tokenizer):
                    "with_region", "bbox_token_idx", "eop_token_idx", "bop_token_idx"]}
     model_args["num_level_reg_features"] = 4
 
-    model = GLaMMForCausalLM.from_pretrained(
-        args.version, torch_dtype=torch.bfloat16, low_cpu_mem_usage=True, **model_args
-    )
+    # prtrain model, build model from config without weight
+    if not args.pretrained:
+      from transformers import AutoConfig, AutoModelForCausalLM
+      cofig  = AutoConfig.from_pretrained(args.version)
+      model = GLaMMForCausalLM(cofig, torch_dtype=torch.bfloat16, low_cpu_mem_usage=True, **model_args)
+    else:
+      # fintune, build model from pretrained weight
+      model = GLaMMForCausalLM.from_pretrained(
+          args.version, torch_dtype=torch.bfloat16, low_cpu_mem_usage=True, **model_args
+      )
     print('\033[92m' + "---- Initialized model from: {} ----".format(args.version) + '\033[0m')
 
     # Configure model tokens
@@ -309,7 +316,7 @@ def initialize_datasets_and_loaders(args, tokenizer):
         val_dataset_classes = {'CocoCapVal': CocoCapDataset,
                                'RefCOCOgRegVal': RefCocoGRegDataset,
                                'VisGenomeRegVal': VisualGenomeRegDataset,
-                               'RefCOCOgSegmVal': ReferSegmDataset,
+                               'RefCOCOgSegVal': ReferSegmDataset,
                                'PsgGCGVal': OpenPsgGCGDataset,
                                'RefCocoGCGVal': RefCOCOgGCGDataset,
                                'FlickrGCGVal': Flickr30kGCGDataset,
