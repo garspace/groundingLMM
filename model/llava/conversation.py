@@ -377,7 +377,8 @@ conv_llava_v1_mmtag = Conversation(
     version="v1_mmtag",
 )
 
-default_conversation = conv_vicuna_v0
+#default_conversation = conv_vicuna_v0
+default_conversation = conv_vicuna_v1 # refcoco dataset
 conv_templates = {
     "default": conv_vicuna_v0,
     "v0": conv_vicuna_v0,
