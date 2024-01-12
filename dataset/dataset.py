@@ -194,7 +194,8 @@ def custom_collate_fn(batch, tokenizer=None, use_mm_start_end=True, inference=Fa
 def _process_conversation(conversation, target, tokenizer, sep, sep2):
     total_len = target.ne(tokenizer.pad_token_id).sum().item()
     rounds = conversation.split(sep2)
-    cur_len = 1
+    #cur_len = 1
+    cur_len = 0 # cocoref dataset
     target[:cur_len] = IGNORE_INDEX
 
     for rou in rounds:
