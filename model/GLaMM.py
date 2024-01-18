@@ -239,7 +239,8 @@ class GLaMMForCausalLM(LlavaLlamaForCausalLM):
             # During inference, we have original size list in place of label list
             pred_mask = self.model.grounding_encoder.postprocess_masks(
                 low_res_masks, input_size=resize_list[i], original_size=orig_size, )
-            pred_masks.append(pred_mask[:, 0])
+            #pred_masks.append(pred_mask[:, 0])
+            pred_masks.append(pred_mask[0, :])
         return pred_masks
 
     def _calculate_losses(self, pred_masks, masks_list, output):
