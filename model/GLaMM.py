@@ -233,7 +233,8 @@ class GLaMMForCausalLM(LlavaLlamaForCausalLM):
                 image_embeddings=image_embeddings[i].unsqueeze(0),
                 image_pe=self.model.grounding_encoder.prompt_encoder.get_dense_pe(),
                 sparse_prompt_embeddings=sparse_embeddings, dense_prompt_embeddings=dense_embeddings,
-                multimask_output=False, )
+                # multimask_output=False, ) # output single mask
+                multimask_output=True, ) # output multi mask
             orig_size = label_list[i].shape if not infer else label_list[i]
             # During inference, we have original size list in place of label list
             pred_mask = self.model.grounding_encoder.postprocess_masks(
