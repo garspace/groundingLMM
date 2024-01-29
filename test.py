@@ -75,7 +75,7 @@ def prepare_mask(input_image, image_np, pred_masks, text_output, color_history):
             save_img = image_np.copy()
             colors_temp = colors
             seg_count = text_output.count("[SEG]")
-            mask_list = mask_list[-seg_count:]
+            # mask_list = mask_list[-seg_count:] # all the mask
             for curr_mask in mask_list:
                 color = random.choice(colors_temp)
                 if len(colors_temp) > 0:
