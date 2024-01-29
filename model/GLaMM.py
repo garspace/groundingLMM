@@ -266,7 +266,8 @@ class GLaMMForCausalLM(LlavaLlamaForCausalLM):
                     if gt_mask.shape[0] > pred_mask.shape[0]:
                         gt_mask = gt_mask[:pred_mask.shape[0]]
                     else:
-                        gt_mask = torch.vstack([gt_mask, torch.zeros(tuple((pred_mask.shape[0]-gt_mask.shape[0],gt_mask.shape[1],gt_mask.shape[2])), device=gt_mask.device)])
+                        pred_mask = pred_mask[:gt_mask.shape[0]] # multi mask
+                        #gt_mask = torch.vstack([gt_mask, torch.zeros(tuple((pred_mask.shape[0]-gt_mask.shape[0],gt_mask.shape[1],gt_mask.shape[2])), device=gt_mask.device)])
 
 
                 assert gt_mask.shape[0] == pred_mask.shape[
